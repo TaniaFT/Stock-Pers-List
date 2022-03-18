@@ -12,7 +12,7 @@ safechars = string.ascii_lowercase + string.ascii_uppercase + string.digits + '.
 per_page = 250
 
 r = requests.get(
-    'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=placed&per_page='.format(api_key)
+    'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=accepted&per_page='.format(api_key)
     + str(per_page))
 callsNeeded = (r.json()["query"]["total"] / per_page) + 1
 
@@ -27,7 +27,7 @@ jewelList = []
 
 for x in range(0, callsNeeded):
     r = requests.get(
-        'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=placed&per_page='.format(api_key)
+        'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=accepted&per_page='.format(api_key)
         + str(per_page) + "&offset=" + str(per_page * x))
     for order in r.json()["data"]:
         if order["dispatch_overdue"]:
@@ -104,16 +104,7 @@ def printTest(listChoice):
     for printItem in listChoice:
         print(printItem.fullName())
 
-
 printTest(traceList)
-printTest(traceA5List)
-printTest(letterList)
-printTest(jewelList)
-printTest(sockList)
-printTest(embList)
-printTest(feltList)
-printTest(genList)
-
 
 today_as_string = datetime.datetime.now().strftime('%d-%m-%y')
 fMain = open("perslist-" + today_as_string + ".txt", "w")
