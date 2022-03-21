@@ -62,17 +62,18 @@ for x in range(0, callsNeeded):
                 newItem = perslistClasses.LetterboxProductItem(item)
                 letterList.append(newItem)
 
-            if "socks" in item["item_title"].lower() and "men" in item["item_title"].lower() and "name" in item["options"][0]["name"].lower():
-                newItem = perslistClasses.MenSockProductItem(item)
-                sockList.append(newItem)
-
-            if "hobby socks" in item["item_title"].lower():
-                newItem = perslistClasses.HobbySockProductItem(item)
-                sockList.append(newItem)
-
             if "socks" in item["item_title"].lower() and "name" in item["options"][0]["name"].lower():
-                newItem = perslistClasses.SockProductItem(item)
-                sockList.append(newItem)
+                if "men" in item["item_title"].lower():
+                    newItem = perslistClasses.MenSockProductItem(item)
+                    sockList.append(newItem)
+
+                if "hobby socks" in item["item_title"].lower():
+                    newItem = perslistClasses.HobbySockProductItem(item)
+                    sockList.append(newItem)
+
+                elif "name" in item["options"][0]["name"].lower():
+                    newItem = perslistClasses.SockProductItem(item)
+                    sockList.append(newItem)
 
             if ("embroider" in item["options"][1]["name"].lower() and "yes" in item["options"][1]["value"].lower()) or "embroider" in item["options"][1]["value"]:
                 newItem = perslistClasses.ColourEmbroideredProductItem(item)
@@ -116,11 +117,16 @@ def writeTo(chosenList, listName):
         fMain.write(printItem.fullName() + '\n')
     return
 
+def writeToSpace(chosenList, listName):
+    fMain.write("\n-------------" + listName + "----------------\n \n")
+    for printItem in chosenList:
+        fMain.write(printItem.fullName() + '\n \n')
+    return
 
 writeTo(traceList, "A6 Inserts")
 writeTo(traceA5List, "A5 Inserts")
-writeTo(letterList, "A6 Cards")
-writeTo(jewelList, "Jewellery")
+writeToSpace(letterList, "A6 Cards")
+writeToSpace(jewelList, "Jewellery")
 writeTo(sockList, "Sock Labels")
 writeTo(embList, "Embroidery")
 writeTo(feltList, "Felting")

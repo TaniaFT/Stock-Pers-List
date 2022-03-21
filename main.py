@@ -29,6 +29,7 @@ for x in range(0, callsNeeded):
                     "coffee" in item["item_title"].lower() or
                     "cat socks" in item["item_title"].lower() or
                     "cheese knife" in item["item_title"].lower() or
+                    "tea towel" in item["item_title"].lower() or
                     "embroidery kit" in item["item_title"].lower() or
                     "earrings" in item["item_title"].lower() or
                     "bracelet" in item["item_title"].lower() or

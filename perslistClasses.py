@@ -7,7 +7,6 @@ class BasicProductItem(object):
     def fullName(self):
         return self.itemTitle + ' - ' + self.personalisationString
 
-
 class TracingProductItem(BasicProductItem):
     def __init__(self, productOrder):
         super(TracingProductItem, self).__init__(productOrder)
@@ -16,7 +15,6 @@ class TracingProductItem(BasicProductItem):
     def fullName(self):
         return 'A6 Insert - ' + self.personalisationString
 
-
 class A5TracingProductItem(BasicProductItem):
     def __init__(self, productOrder):
         super(A5TracingProductItem, self).__init__(productOrder)
@@ -24,7 +22,6 @@ class A5TracingProductItem(BasicProductItem):
 
     def fullName(self):
         return 'A5 Insert - ' + self.personalisationString
-
 
 class LetterboxProductItem(BasicProductItem):
     def __init__(self, productOrder):
@@ -64,19 +61,5 @@ class FeltedProductItem(BasicProductItem):
 class JewelleryProductItem(BasicProductItem):
     def __init__(self, productOrder):
         super(JewelleryProductItem, self).__init__(productOrder)
-        self.personalisationString = ' - ' + (str(productOrder["options"][-1]["value"]))
-
-class BirthBlanketProductItem(BasicProductItem):
-    def __init__(self, productOrder):
-        super(BirthBlanketProductItem, self).__init__(productOrder)
-        self.personalisationString = str(productOrder["options"][1]["value"])
-
-class BirthBlanketTwoProductItem(BasicProductItem):
-    def __init__(self, productOrder):
-        super(BirthBlanketTwoProductItem, self).__init__(productOrder)
-        self.personalisationString = str(productOrder["options"][1]["value"]) + ' - ' + str(productOrder["options"][2]["value"])
-
-class BirthBlanketThreeProductItem(BasicProductItem):
-    def __init__(self, productOrder):
-        super(BirthBlanketThreeProductItem, self).__init__(productOrder)
+        self.personalisationString = (str(productOrder["options"][-1]["value"]))
 
