@@ -77,13 +77,11 @@ for x in range(0, int(callsNeeded)):
                     newItem = perslistClasses.PlainPlayProductItem(item)
                     genList.append(newItem)
 
-            if ("embroider" in item["options"][1]["name"].lower() and "yes" in item["options"][1][
-                "value"].lower()) or "embroider" in item["options"][1]["value"]:
+            if ("embroider" in item["options"][1]["name"].lower() and "yes" in item["options"][1]["value"].lower()) or "embroider" in item["options"][1]["value"]:
                 newItem = perslistClasses.ColourEmbroideredProductItem(item)
                 embList.append(newItem)
 
-            if ("embroider" in item["options"][0]["name"].lower() and "yes" in item["options"][0][
-                "value"].lower()) or "embroider" in item["options"][0]["value"]:
+            if ("embroider" in item["options"][0]["name"].lower() and "yes" in item["options"][0]["value"].lower()) or "embroider" in item["options"][0]["value"]:
                 newItem = perslistClasses.EmbroideredProductItem(item)
                 embList.append(newItem)
 
@@ -91,10 +89,12 @@ for x in range(0, int(callsNeeded)):
                 newItem = perslistClasses.FeltedProductItem(item)
                 feltList.append(newItem)
 
-            if "bracelet" in item["item_title"].lower() or "necklace" in item["item_title"].lower() or "earrings" in item[
-                "item_title"].lower():
+            if "bracelet" in item["item_title"].lower() or "necklace" in item["item_title"].lower() or "earrings" in item["item_title"].lower():
                 if "gift card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "birth" not in item["item_title"].lower():
                     newItem = perslistClasses.JewelleryProductItem(item)
+                    jewelList.append(newItem)
+                if "globe" in item["item_title"].lower():
+                    newItem = perslistClasses.WorldJewelleryProductItem(item)
                     jewelList.append(newItem)
                 if "gift card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "delicate birth" in item["item_title"].lower():
                     newItem = perslistClasses.JewelleryBirthProductItem(item)

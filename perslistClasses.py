@@ -68,6 +68,11 @@ class JewelleryProductItem(BasicProductItem):
         super(JewelleryProductItem, self).__init__(productOrder)
         self.personalisationString = str(productOrder["options"][-1]["value"])
 
+class WorldJewelleryProductItem(BasicProductItem):
+    def __init__(self, productOrder):
+        super(WorldJewelleryProductItem, self).__init__(productOrder)
+        self.personalisationString = (str(productOrder["options"][-2]["value"]) + " - " + str(productOrder["options"][-1]["value"]))
+
 class JewelleryBirthProductItem(BasicProductItem):
     def __init__(self, productOrder):
         super(JewelleryBirthProductItem, self).__init__(productOrder)
