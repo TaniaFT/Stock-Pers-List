@@ -43,6 +43,11 @@ class SockProductItem(BasicProductItem):
         super(SockProductItem, self).__init__(productOrder)
         self.personalisationString = str(productOrder["options"][0]["value"])
 
+class ChooseSockProductItem(BasicProductItem):
+    def __init__(self, productOrder):
+        super(ChooseSockProductItem, self).__init__(productOrder)
+        self.personalisationString = str(productOrder["options"][1]["value"])
+
 class ColourEmbroideredProductItem(BasicProductItem):
     def __init__(self, productOrder):
         super(ColourEmbroideredProductItem, self).__init__(productOrder)
@@ -51,7 +56,7 @@ class ColourEmbroideredProductItem(BasicProductItem):
 class EmbroideredProductItem(BasicProductItem):
     def __init__(self, productOrder):
         super(EmbroideredProductItem, self).__init__(productOrder)
-        self.personalisationString = (str(productOrder["options"][1]["value"]))
+        self.personalisationString = str(productOrder["options"][1]["value"])
 
 class FeltedProductItem(BasicProductItem):
     def __init__(self, productOrder):
@@ -61,5 +66,24 @@ class FeltedProductItem(BasicProductItem):
 class JewelleryProductItem(BasicProductItem):
     def __init__(self, productOrder):
         super(JewelleryProductItem, self).__init__(productOrder)
-        self.personalisationString = (str(productOrder["options"][-1]["value"]))
+        self.personalisationString = str(productOrder["options"][-1]["value"])
 
+class JewelleryBirthProductItem(BasicProductItem):
+    def __init__(self, productOrder):
+        super(JewelleryBirthProductItem, self).__init__(productOrder)
+        self.personalisationString = (str(productOrder["options"][0]["value"])) + " - " + (str(productOrder["options"][-1]["value"]))
+
+class ChoosePlayProductItem(BasicProductItem):
+    def __init__(self, productOrder):
+        super(ChoosePlayProductItem, self).__init__(productOrder)
+        self.personalisationString = (str(productOrder["options"][0]["value"])) + " - " + (str(productOrder["options"][-2]["value"]))
+
+class PlainPlayProductItem(BasicProductItem):
+    def __init__(self, productOrder):
+        super(PlainPlayProductItem, self).__init__(productOrder)
+        self.personalisationString = str(productOrder["options"][-2]["value"])
+
+class EcoBirthProductItem(BasicProductItem):
+    def __init__(self, productOrder):
+        super(EcoBirthProductItem, self).__init__(productOrder)
+        self.personalisationString = (str(productOrder["options"][0]["value"]) + " - " + str(productOrder["options"][1]["value"]))

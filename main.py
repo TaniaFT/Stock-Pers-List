@@ -13,7 +13,7 @@ r = requests.get(
 callsNeeded = (r.json()["query"]["total"] / per_page) + 1
 
 stocklist = {}
-for x in range(0, callsNeeded):
+for x in range(0, int(callsNeeded)):
     r = requests.get(
         'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=accepted&per_page='.format(api_key)
         + str(per_page) + "&offset=" + str(per_page * x))
