@@ -1,8 +1,8 @@
 # StudioHop
 
-For use with our NOTHS storefront
+For use with a NOTHS storefront
 
-stocklist.py is, as the name suggests, a stocklist generator, which ignores products that aren't kept in our warehouse whilst writing a sorted stocklist of the rest. Separating into general, socks, gloves, and foil scarves, it saves us hand writing a list for hundreds of orders.
+stocklist.py is, as the name suggests, a stocklist generator, which ignores products that aren't kept in the warehouse whilst writing a sorted stocklist of the rest. Separating into general, socks, gloves, and foil scarves, it saves hand writing a list for hundreds of orders.
 
 perslist.py imports perslistClasses.py to create a list of personalisations, split based on product personalisation method (such as printed A6/A5 inserts, embroidery, felting, etc). 
 
