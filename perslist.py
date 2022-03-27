@@ -38,9 +38,11 @@ for x in range(0, int(callsNeeded)):
                     "face mask" in item["item_title"].lower() or
                     "cat socks" in item["item_title"].lower() or
                     "photo" in item["item_title"].lower() or
+                    " bag " in item["item_title"].lower() or
                     "headband" in item["item_title"].lower() or
                     "bridesmaid" in item["item_title"].lower() or
                     "key holder" in item["item_title"].lower() or
+                    " tie " in item["item_title"].lower() or
                     "and sun" in item["item_title"].lower() or
                     "keyring" in item["item_title"].lower()):
                 continue
@@ -74,10 +76,10 @@ for x in range(0, int(callsNeeded)):
                 letterList.append(newItem)
 
             if "baby play mat" in item["item_title"].lower():
-                if "animal faces" in item["item_title"].lower():
+                if "animal" in item["item_title"].lower() and "yes" in item["options"][1]["value"].lower():
                     newItem = perslistClasses.ChoosePlayProductItem(item)
                     genList.append(newItem)
-                else:
+                if "animal" not in item["item_title"].lower() and "yes" in item["options"][0]["value"].lower():
                     newItem = perslistClasses.PlainPlayProductItem(item)
                     genList.append(newItem)
 
@@ -93,18 +95,12 @@ for x in range(0, int(callsNeeded)):
                 newItem = perslistClasses.FeltedProductItem(item)
                 feltList.append(newItem)
 
-            if "personalis" in item["options"][0]["name"].lower() and "yes" in item["options"][0][
-                "value"].lower() and "embroider" not in item["options"][0]["value"].lower() and "felt" not in \
-                    item["options"][0]["value"].lower():
-                newItem = perslistClasses.BasicProductItem(item)
-                genList.append(newItem)
-
             if "bracelet" in item["item_title"].lower() or "necklace" in item["item_title"].lower() or "earrings" in item[
                 "item_title"].lower():
                 if "gift card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "birth" not in item["item_title"].lower():
                     newItem = perslistClasses.JewelleryProductItem(item)
                     jewelList.append(newItem)
-                if "globe" in item["item_title"].lower():
+                if "globe" in item["item_title"].lower() and "yes" in item["options"][2]["value"].lower():
                     newItem = perslistClasses.LetterboxProductItem(item)
                     jewelList.append(newItem)
                 if "gift card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2][
@@ -112,9 +108,11 @@ for x in range(0, int(callsNeeded)):
                     newItem = perslistClasses.JewelleryBirthProductItem(item)
                     jewelList.append(newItem)
 
-            if "personalis" in item["options"][1]["name"].lower() and "yes" in item["options"][1][
-                "value"].lower() and "embroider" not in item["options"][1]["value"].lower() and "felt" not in \
-                    item["options"][1]["value"].lower():
+            if "personalis" in item["options"][0]["name"].lower() and "yes" in item["options"][0]["value"].lower() and "embroider" not in item["options"][0]["value"].lower() and "play mat" not in item["item_title"].lower() and "felt" not in item["options"][0]["value"].lower():
+                newItem = perslistClasses.BasicProductItem(item)
+                genList.append(newItem)
+
+            if "personalis" in item["options"][1]["name"].lower() and "yes" in item["options"][1]["value"].lower() and "embroider" not in item["options"][1]["value"].lower() and "play mat" not in item["item_title"].lower() and "felt" not in item["options"][1]["value"].lower():
                 if "eco colour" in item["item_title"].lower() or "summer colourblock" in item["item_title"].lower():
                     newItem = perslistClasses.FontOptionProductItem(item)
                     genList.append(newItem)
@@ -136,7 +134,7 @@ for x in range(0, int(callsNeeded)):
                     newItem = perslistClasses.ChooseSockProductItem(item)
                     sockList.append(newItem)
 
-                elif "name" in item["options"][0]["name"].lower():
+                elif "name" in item["options"][0]["name"].lower() and "men" not in item["item_title"].lower():
                     newItem = perslistClasses.SockProductItem(item)
                     sockList.append(newItem)
 
@@ -144,8 +142,8 @@ for x in range(0, int(callsNeeded)):
 
 traceList = sorted(traceList, key=lambda TracingProductItem: TracingProductItem.personalisationString)
 traceA5List = sorted(traceA5List, key=lambda A5TracingProductItem: A5TracingProductItem.personalisationString)
-embList = sorted(embList, key=lambda BasicProductItem: BasicProductItem.itemTitle)
-feltList = sorted(feltList, key=lambda BasicProductItem: BasicProductItem.itemTitle)
+embList = sorted(embList, key=lambda EmbroideredProductItem: EmbroideredProductItem.itemTitle)
+feltList = sorted(feltList, key=lambda FeltedProductItem: FeltedProductItem.itemTitle)
 genList = sorted(genList, key=lambda BasicProductItem: BasicProductItem.itemTitle)
 
 
