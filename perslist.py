@@ -103,6 +103,9 @@ for x in range(0, int(callsNeeded)):
                 if "globe" in item["item_title"].lower() and "yes" in item["options"][2]["value"].lower():
                     newItem = perslistClasses.LetterboxProductItem(item)
                     jewelList.append(newItem)
+                if "clover" in item["item_title"].lower() and "yes" in item["options"][-2]["value"].lower():
+                    newItem = perslistClasses.LetterboxProductItem(item)
+                    jewelList.append(newItem)
                 if "gift card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2][
                     "value"].lower() and "delicate birth" in item["item_title"].lower():
                     newItem = perslistClasses.JewelleryBirthProductItem(item)
@@ -179,5 +182,6 @@ writeTo(sockList, "Sock Labels")
 writeTo(embList, "Embroidery")
 writeTo(feltList, "Felting")
 writeTo(genList, "Misc")
+
 
 fMain.close()
