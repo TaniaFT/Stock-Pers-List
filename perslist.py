@@ -11,7 +11,7 @@ per_page = 250
 # &state=dispatched&estimated_dispatch_at%5Bfrom%5D=2022-03-25T09%3A24%3A35%2B00%3A00
 
 r = requests.get(
-    'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=placed&per_page='.format(
+    'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=accepted&per_page='.format(
         api_key)
     + str(per_page))
 callsNeeded = (r.json()["query"]["total"] / per_page) + 1
@@ -27,7 +27,7 @@ jewelList = []
 
 for x in range(0, int(callsNeeded)):
     r = requests.get(
-        'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=placed&per_page='.format(
+        'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=accepted&per_page='.format(
             api_key)
         + str(per_page) + "&offset=" + str(per_page * x))
     for order in r.json()["data"]:
@@ -83,12 +83,12 @@ for x in range(0, int(callsNeeded)):
                     newItem = perslistClasses.PlainPlayProductItem(item)
                     genList.append(newItem)
 
-            if ("embroider" in item["options"][1]["name"].lower() and "yes" in item["options"][1]["value"].lower()) or "embroider" in item["options"][1]["value"]:
-                newItem = perslistClasses.ColourEmbroideredProductItem(item)
-                embList.append(newItem)
-
             if ("embroider" in item["options"][0]["name"].lower() and "yes" in item["options"][0]["value"].lower()) or "embroider" in item["options"][0]["value"]:
                 newItem = perslistClasses.EmbroideredProductItem(item)
+                embList.append(newItem)
+
+            if ("embroider" in item["options"][1]["name"].lower() and "yes" in item["options"][1]["value"].lower()) or "embroider" in item["options"][1]["value"]:
+                newItem = perslistClasses.ColourEmbroideredProductItem(item)
                 embList.append(newItem)
 
             if "felt" in item["options"][1]["value"].lower():
