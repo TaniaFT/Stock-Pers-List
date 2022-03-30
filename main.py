@@ -22,7 +22,6 @@ for x in range(0, int(callsNeeded)):
             continue
         for item in order["items"]:
             if ("bookmark" in item["item_title"].lower() or
-                    "necklace" in item["item_title"].lower() or
                     "brooch" in item["item_title"].lower() or
                     "face mask" in item["item_title"].lower() or
                     "belt" in item["item_title"].lower() or
@@ -30,9 +29,6 @@ for x in range(0, int(callsNeeded)):
                     "cat socks" in item["item_title"].lower() or
                     "cheese knife" in item["item_title"].lower() or
                     "tea towel" in item["item_title"].lower() or
-                    "embroidery kit" in item["item_title"].lower() or
-                    "earrings" in item["item_title"].lower() or
-                    "bracelet" in item["item_title"].lower() or
                     "photo" in item["item_title"].lower() or
                     "keyring" in item["item_title"].lower()):
                 continue
