@@ -8,8 +8,6 @@ safechars = string.ascii_lowercase + string.ascii_uppercase + string.digits + '.
 
 per_page = 250
 
-# &state=dispatched&estimated_dispatch_at%5Bfrom%5D=2022-03-25T09%3A24%3A35%2B00%3A00
-
 r = requests.get(
     'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=accepted&per_page='.format(
         api_key)
@@ -97,7 +95,7 @@ for x in range(0, int(callsNeeded)):
 
             if "bracelet" in item["item_title"].lower() or "necklace" in item["item_title"].lower() or "earrings" in item[
                 "item_title"].lower():
-                if "gift card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "birth" not in item["item_title"].lower():
+                if "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "birth" not in item["item_title"].lower():
                     newItem = perslistClasses.JewelleryProductItem(item)
                     jewelList.append(newItem)
                 if "globe" in item["item_title"].lower() and "yes" in item["options"][2]["value"].lower():
