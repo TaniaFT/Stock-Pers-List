@@ -8,6 +8,8 @@ safechars = string.ascii_lowercase + string.ascii_uppercase + string.digits + '.
 
 per_page = 250
 
+# &estimated_dispatch_at%5Bfrom%5D=2022-03-31T09%3A41%3A39%2B01%3A00
+
 r = requests.get(
     'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=accepted&per_page='.format(
         api_key)
@@ -35,11 +37,11 @@ for x in range(0, int(callsNeeded)):
             if ("bookmark" in item["item_title"].lower() or
                     "face mask" in item["item_title"].lower() or
                     "cat socks" in item["item_title"].lower() or
-                    "photo" in item["item_title"].lower() or
                     " bag " in item["item_title"].lower() or
                     "headband" in item["item_title"].lower() or
                     "bridesmaid" in item["item_title"].lower() or
                     "key holder" in item["item_title"].lower() or
+                    "tea towel" in item["item_title"].lower() or
                     " tie " in item["item_title"].lower() or
                     "and sun" in item["item_title"].lower() or
                     "brooch" in item["item_title"].lower() or
@@ -82,6 +84,10 @@ for x in range(0, int(callsNeeded)):
                     newItem = perslistClasses.PlainPlayProductItem(item)
                     genList.append(newItem)
 
+            if "mile" in item["item_title"].lower() and "blanket" in item["item_title"].lower():
+                newItem = perslistClasses.SockProductItem(item)
+                genList.append(newItem)
+
             if ("embroider" in item["options"][0]["name"].lower() and "yes" in item["options"][0]["value"].lower()) or "embroider" in item["options"][0]["value"]:
                 newItem = perslistClasses.EmbroideredProductItem(item)
                 embList.append(newItem)
@@ -94,10 +100,12 @@ for x in range(0, int(callsNeeded)):
                 newItem = perslistClasses.FeltedProductItem(item)
                 feltList.append(newItem)
 
-            if "bracelet" in item["item_title"].lower() or "necklace" in item["item_title"].lower() or "earrings" in item[
-                "item_title"].lower():
+            if "bracelet" in item["item_title"].lower() or "necklace" in item["item_title"].lower() or "earrings" in item["item_title"].lower():
                 if "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "birth" not in item["item_title"].lower():
                     newItem = perslistClasses.JewelleryProductItem(item)
+                    jewelList.append(newItem)
+                if "locket" in item["item_title"].lower() and "card" in item["options"][-2]["name"].lower():
+                    newItem = perslistClasses.LetterboxProductItem(item)
                     jewelList.append(newItem)
                 if "globe" in item["item_title"].lower() and "yes" in item["options"][2]["value"].lower():
                     newItem = perslistClasses.LetterboxProductItem(item)
@@ -105,7 +113,7 @@ for x in range(0, int(callsNeeded)):
                 if "clover" in item["item_title"].lower() and "yes" in item["options"][-2]["value"].lower():
                     newItem = perslistClasses.LetterboxProductItem(item)
                     jewelList.append(newItem)
-                if "gift card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2][
+                if "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2][
                     "value"].lower() and "delicate birth" in item["item_title"].lower():
                     newItem = perslistClasses.JewelleryBirthProductItem(item)
                     jewelList.append(newItem)
@@ -178,9 +186,9 @@ writeTo(traceA5List, "A5 Inserts")
 writeToSpace(letterList, "A6 Cards")
 writeToSpace(jewelList, "Jewellery")
 writeTo(sockList, "Sock Labels")
+writeTo(genList, "Misc")
 writeTo(embList, "Embroidery")
 writeTo(feltList, "Felting")
-writeTo(genList, "Misc")
 
 
 fMain.close()
