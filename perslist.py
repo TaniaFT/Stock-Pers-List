@@ -42,6 +42,7 @@ for x in range(0, int(callsNeeded)):
                     "key holder" in item["item_title"].lower() or
                     " tie " in item["item_title"].lower() or
                     "and sun" in item["item_title"].lower() or
+                    "brooch" in item["item_title"].lower() or
                     "keyring" in item["item_title"].lower()):
                 continue
 
