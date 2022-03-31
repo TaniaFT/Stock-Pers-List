@@ -25,6 +25,10 @@ for x in range(0, int(callsNeeded)):
                     "brooch" in item["item_title"].lower() or
                     "face mask" in item["item_title"].lower() or
                     "belt" in item["item_title"].lower() or
+                    "bracelet" in item["item_title"].lower() or
+                    "necklace" in item["item_title"].lower() or
+                    "earrings" in item["item_title"].lower() or
+                    "brooch" in item["item_title"].lower() or
                     "coffee" in item["item_title"].lower() or
                     "cat socks" in item["item_title"].lower() or
                     "cheese knife" in item["item_title"].lower() or
