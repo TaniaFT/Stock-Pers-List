@@ -11,7 +11,8 @@ Once this is proven working and able to pull in the required data, the aim is to
 
 # How to Use
 
-Branch to access. Create a config.py file with api key, as variable api_key - this is imported by both stocklist.py and perslist.py
+Branch to use as needed, stocklist.py is standalone but perslist.py requires perslistClasses.py
+Create a config.py file with api key, as variable api_key - this is imported by both stocklist.py and perslist.py
 
 Simply run the main Python files to generate stocklist and personalisation - we use PyCharm.
 
