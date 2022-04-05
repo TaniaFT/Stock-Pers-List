@@ -45,6 +45,7 @@ for x in range(0, int(callsNeeded)):
                     " tie " in item["item_title"].lower() or
                     "and sun" in item["item_title"].lower() or
                     "brooch" in item["item_title"].lower() or
+                    "initial charm" in item["item_title"].lower() or
                     "keyring" in item["item_title"].lower()):
                 continue
 
@@ -101,21 +102,20 @@ for x in range(0, int(callsNeeded)):
                 feltList.append(newItem)
 
             if "bracelet" in item["item_title"].lower() or "necklace" in item["item_title"].lower() or "earrings" in item["item_title"].lower():
-                if "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "birth" not in item["item_title"].lower():
-                    newItem = perslistClasses.JewelleryProductItem(item)
-                    jewelList.append(newItem)
                 if "locket" in item["item_title"].lower() and "card" in item["options"][-2]["name"].lower():
                     newItem = perslistClasses.LetterboxProductItem(item)
                     jewelList.append(newItem)
-                if "globe" in item["item_title"].lower() and "yes" in item["options"][2]["value"].lower():
+                elif "globe" in item["item_title"].lower() and "yes" in item["options"][2]["value"].lower():
                     newItem = perslistClasses.LetterboxProductItem(item)
                     jewelList.append(newItem)
-                if "clover" in item["item_title"].lower() and "yes" in item["options"][-2]["value"].lower():
+                elif "clover" in item["item_title"].lower() and "yes" in item["options"][-2]["value"].lower():
                     newItem = perslistClasses.LetterboxProductItem(item)
                     jewelList.append(newItem)
-                if "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2][
-                    "value"].lower() and "delicate birth" in item["item_title"].lower():
+                elif "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "delicate birth" in item["item_title"].lower():
                     newItem = perslistClasses.JewelleryBirthProductItem(item)
+                    jewelList.append(newItem)
+                elif "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower():
+                    newItem = perslistClasses.JewelleryProductItem(item)
                     jewelList.append(newItem)
 
             if "personalis" in item["options"][0]["name"].lower() and "yes" in item["options"][0]["value"].lower() and "embroider" not in item["options"][0]["value"].lower() and "play mat" not in item["item_title"].lower() and "felt" not in item["options"][0]["value"].lower():
