@@ -1,14 +1,9 @@
-import string
 import requests
 import datetime
 from config import api_key
 import perslistClasses
 
-safechars = string.ascii_lowercase + string.ascii_uppercase + string.digits + '.-,<>" &/()+%'
-
 per_page = 250
-
-# &estimated_dispatch_at%5Bfrom%5D=2022-03-31T09%3A41%3A39%2B01%3A00
 
 r = requests.get(
     'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=accepted&per_page='.format(
@@ -16,6 +11,7 @@ r = requests.get(
     + str(per_page))
 callsNeeded = (r.json()["query"]["total"] / per_page) + 1
 
+# Creating empty lists for each style of personalisation, to append to later
 traceList = []
 traceA5List = []
 letterList = []
@@ -35,6 +31,7 @@ for x in range(0, int(callsNeeded)):
             continue
         for item in order["items"]:
             if ("bookmark" in item["item_title"].lower() or
+                    # NOTE FOR USERS - ADD ERROR-CAUSING PRODUCT TITLES HERE, IN SAME FORMAT AS BELOW LINES
                     "face mask" in item["item_title"].lower() or
                     "cat socks" in item["item_title"].lower() or
                     " bag " in item["item_title"].lower() or
@@ -48,6 +45,8 @@ for x in range(0, int(callsNeeded)):
                     "initial charm" in item["item_title"].lower() or
                     "keyring" in item["item_title"].lower()):
                 continue
+
+            # Checks titles and personalisation details for each order, adding to required lists as objects using relevant class
 
             if "gold foil birth" in item["item_title"].lower():
                 if "insert" in item["options"][1]["name"].lower() and "insert" in item["options"][1]["value"].lower():
@@ -149,7 +148,7 @@ for x in range(0, int(callsNeeded)):
                     sockList.append(newItem)
 
 
-
+# Sorts relevant lists into alphabetical order, ready for writing to final doc. Note, some are sorted by product name, others by personalisation
 traceList = sorted(traceList, key=lambda TracingProductItem: TracingProductItem.personalisationString)
 traceA5List = sorted(traceA5List, key=lambda A5TracingProductItem: A5TracingProductItem.personalisationString)
 embList = sorted(embList, key=lambda EmbroideredProductItem: EmbroideredProductItem.itemTitle)
@@ -157,16 +156,21 @@ feltList = sorted(feltList, key=lambda FeltedProductItem: FeltedProductItem.item
 genList = sorted(genList, key=lambda BasicProductItem: BasicProductItem.itemTitle)
 
 
+# Function for using console to test, rather than writing in full. Use currently double-commented line below, with desired list
 def printTest(listChoice):
     for printItem in listChoice:
         print(printItem.fullName())
 
+## printTest(traceList)
 
+
+# Creates a file with date based name, and adds title line
 today_as_string = datetime.datetime.now().strftime('%d-%m-%y')
 fMain = open("perslist-" + today_as_string + ".txt", "w")
 fMain.write("NOTHS PERSONALISATION: " + today_as_string)
 
 
+# Function to write the title of a product type, followed by full name and personalisation of product objects in specified list
 def writeTo(chosenList, listName):
     fMain.write("\n-------------" + listName + "----------------\n \n")
     for printItem in chosenList:
@@ -174,6 +178,7 @@ def writeTo(chosenList, listName):
     return
 
 
+# As above, but with an additional space between each line - helpful for products with potential multi-line personalisations such as gift cards
 def writeToSpace(chosenList, listName):
     fMain.write("\n-------------" + listName + "----------------\n \n")
     for printItem in chosenList:
@@ -181,6 +186,7 @@ def writeToSpace(chosenList, listName):
     return
 
 
+# Calling above functions to write to file
 writeTo(traceList, "A6 Inserts")
 writeTo(traceA5List, "A5 Inserts")
 writeToSpace(letterList, "A6 Cards")
