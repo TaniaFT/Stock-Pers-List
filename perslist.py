@@ -5,6 +5,8 @@ import perslistClasses
 
 per_page = 250
 
+# &state=dispatched&estimated_dispatch_at%5Bfrom%5D=2022-04-07 - change date to current and replace '&state=accepted' in links below, to check orders already dispatched
+
 r = requests.get(
     'https://api.notonthehighstreet.com/api/v1/orders?token={}&state=accepted&per_page='.format(
         api_key)
@@ -113,7 +115,7 @@ for x in range(0, int(callsNeeded)):
                 elif "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "delicate birth" in item["item_title"].lower():
                     newItem = perslistClasses.JewelleryBirthProductItem(item)
                     jewelList.append(newItem)
-                elif "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower():
+                elif "card" in item["options"][-2]["name"].lower() and ("yes" in item["options"][-2]["value"].lower() or "no" not in item["options"][-2]["value"].lower()):
                     newItem = perslistClasses.JewelleryProductItem(item)
                     jewelList.append(newItem)
 
