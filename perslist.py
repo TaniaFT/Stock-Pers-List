@@ -40,6 +40,7 @@ for x in range(0, int(callsNeeded)):
                     "headband" in item["item_title"].lower() or
                     "bridesmaid" in item["item_title"].lower() or
                     "key holder" in item["item_title"].lower() or
+                    "floral bird" in item["item_title"].lower() or
                     "tea towel" in item["item_title"].lower() or
                     " tie " in item["item_title"].lower() or
                     "and sun" in item["item_title"].lower() or
@@ -86,7 +87,7 @@ for x in range(0, int(callsNeeded)):
                     newItem = perslistClasses.PlainPlayProductItem(item)
                     genList.append(newItem)
 
-            if "mile" in item["item_title"].lower() and "blanket" in item["item_title"].lower():
+            if "milestone cotton" in item["item_title"].lower() and "blanket" in item["item_title"].lower():
                 newItem = perslistClasses.SockProductItem(item)
                 genList.append(newItem)
 
@@ -119,11 +120,11 @@ for x in range(0, int(callsNeeded)):
                     newItem = perslistClasses.JewelleryProductItem(item)
                     jewelList.append(newItem)
 
-            if "personalis" in item["options"][0]["name"].lower() and "yes" in item["options"][0]["value"].lower() and "embroider" not in item["options"][0]["value"].lower() and "play mat" not in item["item_title"].lower() and "felt" not in item["options"][0]["value"].lower():
+            if "personalis" in item["options"][0]["name"].lower() and "yes" in item["options"][0]["value"].lower() and "embroider" not in item["options"][0]["value"].lower() and "play mat" not in item["item_title"].lower() and "mile" not in item["item_title"].lower() and "felt" not in item["options"][0]["value"].lower():
                 newItem = perslistClasses.BasicProductItem(item)
                 genList.append(newItem)
 
-            if "personalis" in item["options"][1]["name"].lower() and "yes" in item["options"][1]["value"].lower() and "embroider" not in item["options"][1]["value"].lower() and "play mat" not in item["item_title"].lower() and "felt" not in item["options"][1]["value"].lower():
+            if "personalis" in item["options"][1]["name"].lower() and "yes" in item["options"][1]["value"].lower() and "embroider" not in item["options"][1]["value"].lower() and "play mat" not in item["item_title"].lower() and "mile" not in item["item_title"].lower() and "felt" not in item["options"][1]["value"].lower():
                 if "eco colour" in item["item_title"].lower() or "summer colourblock" in item["item_title"].lower():
                     newItem = perslistClasses.FontOptionProductItem(item)
                     genList.append(newItem)
