@@ -87,7 +87,7 @@ for x in range(0, int(callsNeeded)):
                     newItem = perslistClasses.PlainPlayProductItem(item)
                     genList.append(newItem)
 
-            if "milestone cotton" in item["item_title"].lower() and "blanket" in item["item_title"].lower():
+            if "milestone cotton" in item["item_title"].lower():
                 newItem = perslistClasses.SockProductItem(item)
                 genList.append(newItem)
 
