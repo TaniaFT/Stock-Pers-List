@@ -1,6 +1,6 @@
 # NOTHS Stocklist + Personalisation List
 
-For use with NOTHS storefront
+For use with NOTHS storefront - made for a specific company and with easy to adapt layout for their benefit - readme also for their benefit.
 
 stocklist.py is, as the name suggests, a stocklist generator, which ignores products that aren't kept in the warehouse whilst writing a sorted stocklist of the rest. Separating into general, socks, gloves, and foil scarves, it saves hand writing a list for hundreds of orders.
 
