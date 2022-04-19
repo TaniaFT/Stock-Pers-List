@@ -39,7 +39,7 @@ A VENV will be needed (Pycharm will prompt setup, try to choose Python 3 or abov
 
 Both stocklist.py and perslist.py may require requirements.txt be opened in PyCharm and any installations approved before they can run, this is a one off when setting up the project.
 
-Right click on any  Create a config.py file in the same folder with your api key (can find on NOTHS CMS) as string variable api_key - this is imported by both stocklist.py and perslist.py. 
+Right click on any file and select New > Python File. Name this file 'config.py', it will contain your api key (available via NOTHS CMS) as a variable named api_key.
 
 ![Screenshot 2022-04-07 at 11 12 08](https://user-images.githubusercontent.com/103183077/162176531-f144be31-e0ab-443a-9343-95a7f62a5cfa.png)
 
