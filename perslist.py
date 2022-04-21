@@ -5,8 +5,7 @@ import perslistClasses
 
 per_page = 250
 
-# "&state=dispatched&estimated_dispatch_at%5Bfrom%5D=2022-04-20" - change date to current and replace order_status below, to check orders already dispatched
-
+# "&state=dispatched&estimated_dispatch_at%5Bfrom%5D=2022-04-21" - change date to current and replace order_status below, to check orders already dispatched
 order_status = "&state=dispatched&estimated_dispatch_at%5Bfrom%5D=2022-04-20"
 
 r = requests.get(
@@ -42,24 +41,25 @@ for x in range(0, int(callsNeeded)):
                     "headband" in item["item_title"].lower() or
                     "bridesmaid" in item["item_title"].lower() or
                     "key holder" in item["item_title"].lower() or
+                    "gun metal" in item["item_title"].lower() or
+                    "woodland" in item["item_title"].lower() or
                     "floral bird" in item["item_title"].lower() or
                     "tea towel" in item["item_title"].lower() or
                     " tie " in item["item_title"].lower() or
-                    "and sun" in item["item_title"].lower() or
                     "brooch" in item["item_title"].lower() or
                     "initial charm" in item["item_title"].lower() or
                     "keyring" in item["item_title"].lower()):
                 continue
 
 
-            def searching(searchOne, searchTwo, persClass, listChoice):
+            def searching(searchOptionName, searchOptionValue, persClass, listChoice):
                 for option in item["options"]:
-                    if searchOne in option["name"].lower() and searchTwo in option["value"].lower():
+                    if searchOptionName in option["name"].lower() and searchOptionValue in option["value"].lower():
                         newItem = persClass
                         listChoice.append(newItem)
 
-
-            if "gold birth" in item["item_title"].lower() or "eco birth" in item["item_title"].lower():
+# Checks titles and personalisation details for each order, adding to required lists as objects using relevant class
+            if "foil birth " in item["item_title"].lower() or "eco birth" in item["item_title"].lower():
                 searching('insert', 'insert', (perslistClasses.TwoOptionItem(item, 0, -1)), traceList)
                 if "eco" in item["item_title"].lower():
                     newItem = perslistClasses.TwoOptionItem(item, 0, 1)
@@ -68,10 +68,10 @@ for x in range(0, int(callsNeeded)):
                 searching('insert', 'insert', perslistClasses.TwoOptionItem(item, 1, -1), traceA5List)
 
             elif "dandelion" in item["item_title"].lower() or "letterbox gift" in item["item_title"].lower():
-                if "cat paw print" in item["item_title"].lower():
-                    searching('personalisation', ' ', perslistClasses.BasicProductItem(item, -1), letterList)
+                if "cat paw" in item["item_title"].lower():
+                    searching('card?', ' ', perslistClasses.BasicProductItem(item, -1), letterList)
                 else:
-                    searching('personalisation', ' ', perslistClasses.TwoOptionItem(item, -2, -1), letterList)
+                    searching('ersonalisation', ' ', perslistClasses.TwoOptionItem(item, -2, -1), letterList)
 
             elif "baby play mat" in item["item_title"].lower():
                 if "animal" in item["item_title"].lower():
@@ -79,44 +79,17 @@ for x in range(0, int(callsNeeded)):
                 else:
                     searching('personalised', 'yes', perslistClasses.BasicProductItem(item, -2), genList)
 
-            # Checks titles and personalisation details for each order, adding to required lists as objects using relevant class
-
-            # if "birth " in item["item_title"].lower():
-            #     if "gold foil" in item["item_title"].lower() and "insert" in item["options"][1]["name"].lower() and "insert" in item["options"][1]["value"].lower():
-            #             newItem = perslistClasses.TwoOptionItem(item, 0, -1)
-            #             traceList.append(newItem)
-            #     elif "eco" in item["item_title"].lower():
-            #         newItem = perslistClasses.TwoOptionItem(item, 0, 1)
-            #         genList.append(newItem)
-            #         if "insert" in item["options"][2]["name"].lower() and "insert" in item["options"][2]["value"].lower():
-            #             newItem = perslistClasses.TwoOptionItem(item, 0, -1)
-            #             traceList.append(newItem)
-            #     elif "choose your '" in item["item_title"].lower():
-            #         if ("insert" in item["options"][-1]["name"].lower() and "insert" in item["options"][-1]["value"].lower() or
-            #                 "insert" in item["options"][-2]["name"].lower() and "insert" in item["options"][-2][
-            #                     "value"].lower()):
-            #             newItem = perslistClasses.TwoOptionItem(item, 1, -1)
-            #             traceA5List.append(newItem)
-
-            # elif "dandelion" in item["item_title"].lower() or "letterbox gift" in item["item_title"].lower():
-            #     if "cat paw print" in item["item_title"].lower() and "no" not in item["options"][1]["value"]:
-            #         newItem = perslistClasses.BasicProductItem(item, -1)
-            #         letterList.append(newItem)
-                # if "card" in item["options"][-2]["name"].lower() and "no" not in item["options"][-2]["value"].lower():
-                #     newItem = perslistClasses.TwoOptionItem(item, -2, -1)
-                #     letterList.append(newItem)
-
-            # elif "baby play mat" in item["item_title"].lower():
-            #     if "animal" in item["item_title"].lower() and "yes" in item["options"][1]["value"].lower():
-            #         newItem = perslistClasses.TwoOptionItem(item, 0, -2)
-            #         genList.append(newItem)
-            #     elif "animal" not in item["item_title"].lower() and "yes" in item["options"][0]["value"].lower():
-            #         newItem = perslistClasses.BasicProductItem(item, -2)
-            #         genList.append(newItem)
-
             elif "milestone" in item["item_title"].lower():
                 newItem = perslistClasses.BasicProductItem(item, 1)
                 genList.append(newItem)
+
+            elif "bracelet" in item["item_title"].lower() or "necklace" in item["item_title"].lower() or "earrings" in item["item_title"].lower():
+                if "locket" in item["item_title"].lower() or "globe" in item["item_title"].lower() or "clover" in item["item_title"].lower():
+                    searching("card?", " ", perslistClasses.TwoOptionItem(item, -2, -1), jewelList)
+                elif "delicate birth" in item["item_title"].lower():
+                    searching("card", "yes", perslistClasses.TwoOptionItem(item, 0, -1), jewelList)
+                else:
+                    searching("gift card?", " ", perslistClasses.BasicProductItem(item, -1), jewelList)
 
             elif ("embroider" in item["options"][0]["name"].lower() and "yes" in item["options"][0]["value"].lower()) or "embroider" in item["options"][0]["value"]:
                 newItem = perslistClasses.BasicProductItem(item, 1)
@@ -125,32 +98,6 @@ for x in range(0, int(callsNeeded)):
             elif ("embroider" in item["options"][1]["name"].lower() and "yes" in item["options"][1]["value"].lower()) or "embroider" in item["options"][1]["value"]:
                 newItem = perslistClasses.ThreeOptionItem(item, 0, 1, 2)
                 embList.append(newItem)
-
-            elif "felt" in item["options"][1]["value"].lower():
-                newItem = perslistClasses.TwoOptionItem(item, 0, 2)
-                feltList.append(newItem)
-
-            elif "bracelet" in item["item_title"].lower() or "necklace" in item["item_title"].lower() or "earrings" in item["item_title"].lower():
-                if "locket" in item["item_title"].lower() and "card" in item["options"][-2]["name"].lower():
-                    newItem = perslistClasses.TwoOptionItem(item, -2, -1)
-                    jewelList.append(newItem)
-                elif "globe" in item["item_title"].lower() or "clover" in item["item_title"].lower() and "yes" in item["options"][2]["value"].lower():
-                    newItem = perslistClasses.TwoOptionItem(item, -2, -1)
-                    jewelList.append(newItem)
-                elif "card" in item["options"][-2]["name"].lower() and "yes" in item["options"][-2]["value"].lower() and "delicate birth" in item["item_title"].lower():
-                    newItem = perslistClasses.TwoOptionItem(item, 0, -1)
-                    jewelList.append(newItem)
-                elif "card" in item["options"][-2]["name"].lower() and ("yes" in item["options"][-2]["value"].lower() or "no" not in item["options"][-2]["value"].lower()):
-                    newItem = perslistClasses.BasicProductItem(item, -1)
-                    jewelList.append(newItem)
-
-            elif "personalis" in item["options"][0]["name"].lower() and "yes" in item["options"][0]["value"].lower():
-                if "eco colour" in item["item_title"].lower() or "summer colourblock" in item["item_title"].lower():
-                    newItem = perslistClasses.TwoOptionItem(item, 1, 2)
-                    genList.append(newItem)
-                else:
-                    newItem = perslistClasses.BasicProductItem(item, 1)
-                    genList.append(newItem)
 
             elif "socks" in item["item_title"].lower():
                 if "men" in item["item_title"].lower() or "name" in item["options"][0]["name"].lower():
@@ -163,6 +110,12 @@ for x in range(0, int(callsNeeded)):
                     newItem = perslistClasses.BasicProductItem(item, 1)
                     sockList.append(newItem)
 
+            elif "eco colour" in item["item_title"].lower() or "summer colourblock" in item["item_title"].lower():
+                searching("personalis", "yes", perslistClasses.TwoOptionItem(item, 1, 2), genList)
+            elif "chunky" in item["item_title"].lower():
+                searching(" ", "felt", perslistClasses.TwoOptionItem(item, 0, -2), feltList)
+            else:
+                searching("personalis", "yes", perslistClasses.BasicProductItem(item, -2), genList)
 
 
 # Sorts relevant lists into alphabetical order, ready for writing to final doc. Note, some are sorted by product name, others by personalisation
